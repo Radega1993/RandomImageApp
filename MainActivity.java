@@ -5,19 +5,51 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.ImageView;
 
+import java.util.Random;
+
+/**
+ * clase principal donde se hace el random de las imagenes.
+ */
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * tags para imagenes.
+     */
     private static final String TAG = "MainActivity";
 
+    /**
+     * variable para guardar las imagenes.
+     */
+    private ImageView imageView;
+
+    /**
+     * variable para hacer el random.
+     */
+    private Random r;
+
+    /**
+     * array de imagenes.
+     */
+    private Integer[] images = {
+      R.drawable.mano,
+      R.drawable.paloma,
+      R.drawable.perro,
+    };
+
+    /**
+     * funcion para mostar imagen random
+     * @param savedInstanceState
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         Log.d(TAG, "OnCreate: started.");
-        ImageView imageTest = (ImageView) findViewById(R.id.imageTest);
 
+        imageView = (ImageView) findViewById(R.id.imageTest);
+
+        r = new Random();
         //show image
-        int imageResource = getResources().getIdentifier("@drawable/mano", null, this.getPackageName());
-        imageTest.setImageResource(imageResource);
+        imageView.setImageResource(images[r.nextInt(images.length)]);
     }
 }
